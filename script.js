@@ -22,7 +22,6 @@ let entries = [];
       if (entry && entry.quantity >= quantity) {
         const newExit = { id: exits.length + 1, product, value, quantity};
         exits.push(newExit);
-        entry.quantity -= quantity;
         updateTables();
       } else {
         alert("Quantidade insuficiente ou produto inexistente no depósito selecionado.");
@@ -84,4 +83,4 @@ let entries = [];
           <td>${item.quantity}</td>
         </tr>`;
       });
-    }-m
+    }
