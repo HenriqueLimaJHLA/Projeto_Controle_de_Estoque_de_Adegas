@@ -4,57 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Controle de Estoque - Adega</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    .form-group {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    input, button {
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-    }
-    th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-    th {
-      background-color: #f8f8f8;
-    }
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <div class="container">
@@ -77,7 +27,6 @@
           <th>Produto</th>
           <th>Valor (R$)</th>
           <th>Quantidade</th>
-          <th>Depósito</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -90,7 +39,6 @@
           <th>ID</th>
           <th>Produto</th>
           <th>Quantidade</th>
-          <th>Depósito</th>
         </tr>
       </thead>
       <tbody></tbody>
@@ -108,97 +56,6 @@
       <tbody></tbody>
     </table>
   </div>
-
-  <script>
-    let entries = [];
-    let exits = [];
-
-    function addEntry() {
-      const product = document.getElementById("product").value;
-      const value = parseFloat(document.getElementById("value").value).toFixed(2);
-      const quantity = parseInt(document.getElementById("quantity").value);
-      const storage = document.getElementById("storage").value;
-
-      if (product && value && quantity && storage) {
-        const newEntry = { id: entries.length + 1, product, value, quantity, storage };
-        entries.push(newEntry);
-        updateTables();
-      }
-    }
-
-    function addExit() {
-      const product = document.getElementById("product").value;
-      const quantity = parseInt(document.getElementById("quantity").value);
-      const storage = document.getElementById("storage").value;
-
-      const entry = entries.find(e => e.product === product && e.storage === storage);
-      if (entry && entry.quantity >= quantity) {
-        const newExit = { id: exits.length + 1, product, quantity, storage };
-        exits.push(newExit);
-        entry.quantity -= quantity;
-        updateTables();
-      } else {
-        alert("Quantidade insuficiente ou produto inexistente no depósito selecionado.");
-      }
-    }
-
-    function calculateStock() {
-      const stock = {};
-
-      entries.forEach(entry => {
-        const key = `${entry.product}-${entry.storage}`;
-        if (!stock[key]) {
-          stock[key] = { product: entry.product, storage: entry.storage, quantity: 0 };
-        }
-        stock[key].quantity += entry.quantity;
-      });
-
-      exits.forEach(exit => {
-        const key = `${exit.product}-${exit.storage}`;
-        if (stock[key]) {
-          stock[key].quantity -= exit.quantity;
-        }
-      });
-
-      return Object.values(stock);
-    }
-
-    function updateTables() {
-      const entryTable = document.getElementById("entryTable").querySelector("tbody");
-      const exitTable = document.getElementById("exitTable").querySelector("tbody");
-      const stockTable = document.getElementById("stockTable").querySelector("tbody");
-
-      entryTable.innerHTML = "";
-      entries.forEach(entry => {
-        entryTable.innerHTML += `<tr>
-          <td>${entry.id}</td>
-          <td>${entry.product}</td>
-          <td>${entry.value}</td>
-          <td>${entry.quantity}</td>
-          <td>${entry.storage}</td>
-        </tr>`;
-      });
-
-      exitTable.innerHTML = "";
-      exits.forEach(exit => {
-        exitTable.innerHTML += `<tr>
-          <td>${exit.id}</td>
-          <td>${exit.product}</td>
-          <td>${exit.quantity}</td>
-          <td>${exit.storage}</td>
-        </tr>`;
-      });
-
-      stockTable.innerHTML = "";
-      const stock = calculateStock();
-      stock.forEach(item => {
-        stockTable.innerHTML += `<tr>
-          <td>${item.product}</td>
-          <td>${item.storage}</td>
-          <td>${item.quantity}</td>
-        </tr>`;
-      });
-    }
-  </script>
 </body>
+<script src="./script.js"></script>
 </html>
