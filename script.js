@@ -15,11 +15,12 @@ let entries = [];
 
     function addExit() {
       const product = document.getElementById("product").value;
+      const value = parseFloat(document.getElementById("value").value).toFixed(2);
       const quantity = parseInt(document.getElementById("quantity").value);
 
       const entry = entries.find(e => e.product === product);
       if (entry && entry.quantity >= quantity) {
-        const newExit = { id: exits.length + 1, product, quantity,};
+        const newExit = { id: exits.length + 1, product, value, quantity};
         exits.push(newExit);
         entry.quantity -= quantity;
         updateTables();
@@ -61,7 +62,6 @@ let entries = [];
           <td>${entry.product}</td>
           <td>${entry.value}</td>
           <td>${entry.quantity}</td>
-          <td>${entry.storage}</td>
         </tr>`;
       });
 
@@ -71,7 +71,6 @@ let entries = [];
           <td>${exit.id}</td>
           <td>${exit.product}</td>
           <td>${exit.quantity}</td>
-          <td>${exit.storage}</td>
         </tr>`;
       });
 
