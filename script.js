@@ -18,8 +18,10 @@ let entries = [];
       const value = parseFloat(document.getElementById("value").value).toFixed(2);
       const quantity = parseInt(document.getElementById("quantity").value);
 
+      const valorFinal = document.getElementById('qntFinal').innerText
       const entry = entries.find(e => e.product === product);
-      if (entry && entry.quantity >= quantity) {
+    //   const item = ;
+      if (entry && entry.quantity >= quantity && Number(valorFinal) != 0) {
         const newExit = { id: exits.length + 1, product, value, quantity};
         exits.push(newExit);
         updateTables();
@@ -76,11 +78,14 @@ let entries = [];
 
       stockTable.innerHTML = "";
       const stock = calculateStock();
+      var num = 0;
       stock.forEach(item => {
         stockTable.innerHTML += `<tr>
+          <td>${item.length}</td>
           <td>${item.product}</td>
           <td>${item.storage}</td>
-          <td>${item.quantity}</td>
+          <td id="qntFinal">${item.quantity}</td>
         </tr>`;
+        num++;
       });
     }

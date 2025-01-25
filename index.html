@@ -12,8 +12,7 @@
 
     <div class="form-group">
       <input id="product" type="text" placeholder="Produto">
-      <input id="value" type="number" placeholder="Valor (R$)">
-      <input id="quantity" type="number" placeholder="Quantidade">
+      <input id="value" type="number" placeholder="Valor (R$)"><input id="quantity" type="number" placeholder="Quantidade">
       <button onclick="addEntry()">Adicionar Entrada</button>
       <button onclick="addExit()">Registrar Saída</button>
     </div>
@@ -48,6 +47,7 @@
     <table id="stockTable">
       <thead>
         <tr>
+          <th>ID</th>
           <th>Produto</th>
           <th>Depósito</th>
           <th>Quantidade Atual</th>
