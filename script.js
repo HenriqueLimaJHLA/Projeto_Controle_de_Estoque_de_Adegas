@@ -10,6 +10,9 @@ let entries = [];
         const newEntry = { id: entries.length + 1, product, value, quantity };
         entries.push(newEntry);
         updateTables();
+        // document.getElementById("product").value = "";
+        // document.getElementById("value").value = "";
+        // document.getElementById("quantity").value = "";
       }
     }
 
@@ -18,10 +21,9 @@ let entries = [];
       const value = parseFloat(document.getElementById("value").value).toFixed(2);
       const quantity = parseInt(document.getElementById("quantity").value);
 
-      const valorFinal = document.getElementById('qntFinal').innerText
       const entry = entries.find(e => e.product === product);
     //   const item = ;
-      if (entry && entry.quantity >= quantity && Number(valorFinal) != 0) {
+      if (entry && entry.quantity >= quantity) {
         const newExit = { id: exits.length + 1, product, value, quantity};
         exits.push(newExit);
         updateTables();
@@ -33,6 +35,13 @@ let entries = [];
     function calculateStock() {
       const stock = {};
 
+      
+      exits.forEach(exit => {
+        const key = `${exit.product}-${exit.storage}`;
+        if (stock[key]) {
+          stock[key].quantity -= exit.quantity;
+        }
+      });
       entries.forEach(entry => {
         const key = `${entry.product}-${entry.storage}`;
         if (!stock[key]) {
@@ -41,12 +50,6 @@ let entries = [];
         stock[key].quantity += entry.quantity;
       });
 
-      exits.forEach(exit => {
-        const key = `${exit.product}-${exit.storage}`;
-        if (stock[key]) {
-          stock[key].quantity -= exit.quantity;
-        }
-      });
 
       return Object.values(stock);
     }
@@ -81,10 +84,10 @@ let entries = [];
       var num = 0;
       stock.forEach(item => {
         stockTable.innerHTML += `<tr>
-          <td>${item.length}</td>
+          <td class="produtos" id="idProduto${num}">${num}</td>
           <td>${item.product}</td>
           <td>${item.storage}</td>
-          <td id="qntFinal">${item.quantity}</td>
+          <td>${item.quantity}</td>
         </tr>`;
         num++;
       });
