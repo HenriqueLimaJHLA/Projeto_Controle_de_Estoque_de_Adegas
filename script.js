@@ -70,6 +70,7 @@ let entries = [];
         exitTable.innerHTML += `<tr>
           <td>${exit.id}</td>
           <td>${exit.product}</td>
+          <td>${exit.value}</td>
           <td>${exit.quantity}</td>
         </tr>`;
       });
