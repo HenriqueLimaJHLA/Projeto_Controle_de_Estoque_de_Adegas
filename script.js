@@ -1,94 +1,147 @@
 let entries = [];
-    let exits = [];
+let valorc = [];
+let valorv = [];
+let exits = [];
+let stock = {}; 
 
-    function addEntry() {
-      const product = document.getElementById("product").value;
-      const value = parseFloat(document.getElementById("value").value).toFixed(2);
-      const quantity = parseInt(document.getElementById("quantity").value);
+function addEntry() {
+  const product = document.getElementById("product").value;
+  const especification = document.getElementById("grama_litro").value;
+  let value = parseFloat(document.getElementById("value").value)
+  //Valor de compra do produto
+  if (!valorc[product]) {
+    valorc[product] = 0;
+  }
+  valorc[product] = value;
 
-      if (product && value && quantity) {
-        const newEntry = { id: entries.length + 1, product, value, quantity };
-        entries.push(newEntry);
-        updateTables();
-        // document.getElementById("product").value = "";
-        // document.getElementById("value").value = "";
-        // document.getElementById("quantity").value = "";
-      }
+
+  value = value.toFixed(2);
+  const quantity = parseInt(document.getElementById("quantity").value);
+
+  if (product && value && quantity) {
+    const newEntry = { id: entries.length + 1, product, especification, value, quantity };
+    entries.push(newEntry);
+
+    //Quantidade no estoque
+    if (!stock[product]) {
+      stock[product] = 0;
     }
+    stock[product] += quantity;
 
-    function addExit() {
-      const product = document.getElementById("product").value;
-      const value = parseFloat(document.getElementById("value").value).toFixed(2);
-      const quantity = parseInt(document.getElementById("quantity").value);
+    updateTables();
+  }
+}
 
-      const entry = entries.find(e => e.product === product);
-    //   const item = ;
-      if (entry && entry.quantity >= quantity) {
-        const newExit = { id: exits.length + 1, product, value, quantity};
-        exits.push(newExit);
-        updateTables();
-      } else {
-        alert("Quantidade insuficiente ou produto inexistente no depósito selecionado.");
-      }
-    }
+function addExit() {
+  const product = document.getElementById("product").value;
+  const especification = document.getElementById("grama_litro").value;
+  const quantity = parseInt(document.getElementById("quantity").value);
+  
+  //Se existe no estoque
+  if (stock[product] !== undefined) {
 
-    function calculateStock() {
-      const stock = {};
+    //Quantidade no estoque
+    if (stock[product] >= quantity) {
+      stock[product] -= quantity;
 
+      let value = parseFloat(document.getElementById("value").value)
+      //Valor de venda do produto
+      valorv[product] = value;
       
-      exits.forEach(exit => {
-        const key = `${exit.product}-${exit.storage}`;
-        if (stock[key]) {
-          stock[key].quantity -= exit.quantity;
-        }
-      });
-      entries.forEach(entry => {
-        const key = `${entry.product}-${entry.storage}`;
-        if (!stock[key]) {
-          stock[key] = { product: entry.product, storage: entry.storage, quantity: 0 };
-        }
-        stock[key].quantity += entry.quantity;
-      });
-
-
-      return Object.values(stock);
+      value = value.toFixed(2);
+      const newExit = { id: exits.length + 1, product, especification, value, quantity };
+      exits.push(newExit);
+      updateTables();
+    } else {
+      alert("Quantidade Insuficiente No Estoque.");
     }
+  } else {
+    alert("Produto Inexistente No Estoque.");
+  }
+}
 
-    function updateTables() {
-      const entryTable = document.getElementById("entryTable").querySelector("tbody");
-      const exitTable = document.getElementById("exitTable").querySelector("tbody");
-      const stockTable = document.getElementById("stockTable").querySelector("tbody");
+function calculateStock() {
+  return Object.keys(stock).map(product => ({
+    product,
+    quantity: stock[product],
+    vc: valorc[product],
+    vv: valorv[product]
+  }));
+}
 
-      entryTable.innerHTML = "";
-      entries.forEach(entry => {
-        entryTable.innerHTML += `<tr>
-          <td>${entry.id}</td>
-          <td>${entry.product}</td>
-          <td>${entry.value}</td>
-          <td>${entry.quantity}</td>
-        </tr>`;
-      });
+function updateTables() {
+  const entryTable = document.getElementById("entryTable").querySelector("tbody");
+  const exitTable = document.getElementById("exitTable").querySelector("tbody");
+  const stockTable = document.getElementById("stockTable").querySelector("tbody");
 
-      exitTable.innerHTML = "";
-      exits.forEach(exit => {
-        exitTable.innerHTML += `<tr>
-          <td>${exit.id}</td>
-          <td>${exit.product}</td>
-          <td>${exit.value}</td>
-          <td>${exit.quantity}</td>
-        </tr>`;
-      });
+  entryTable.innerHTML = "";
+  entries.forEach(entry => {
+    entryTable.innerHTML += `<tr>
+      <td>${entry.id}</td>
+      <td>${entry.product}</td>
+      <td>${entry.especification}</td>
+      <td>${'R$ '+ (entry.value * entry.quantity).toFixed(2)}</td>
+      <td>${entry.quantity}</td>
+    </tr>`;
+  });
 
-      stockTable.innerHTML = "";
-      const stock = calculateStock();
-      var num = 0;
-      stock.forEach(item => {
-        stockTable.innerHTML += `<tr>
-          <td class="produtos" id="idProduto${num}">${num}</td>
-          <td>${item.product}</td>
-          <td>${item.storage}</td>
-          <td>${item.quantity}</td>
-        </tr>`;
-        num++;
-      });
-    }
+  exitTable.innerHTML = "";
+  exits.forEach(exit => {
+    exitTable.innerHTML += `<tr>
+      <td>${exit.id}</td>
+      <td>${exit.product}</td>
+      <td>${exit.especification}</td>
+      <td>${'R$ '+ (exit.value * exit.quantity).toFixed(2)}</td>
+      <td>${exit.quantity}</td>
+    </tr>`;
+  });
+
+  stockTable.innerHTML = "";
+  const stockData = calculateStock();
+  stockData.forEach((item, index) => {
+    stockTable.innerHTML += `<tr>
+      <td>${index + 1}</td>
+      <td>${item.product}</td>
+      <td>${item.quantity}</td>
+      <td>${'R$ '+ item.vc.toFixed(2)}</td>
+      <td>${item.vv === undefined ? "Nenhuma venda" : 'R$ '+item.vv.toFixed(2)}</td>
+      <td>${item.vv === undefined ? "Necessário 1º venda" : 'R$ '+(item.vv * item.quantity).toFixed(2)}</td>
+    </tr>`;
+  });
+}
+
+
+function isOpen(interval) {
+  const now = new Date();
+  const currentTime = now.getHours() * 60 + now.getMinutes(); // Convertendo a hora atual para minutos
+
+  // Convertendo o intervalo de tempo para minutos
+  const [start, end] = interval.split('-').map(time => {
+      const [hours, minutes] = time.split(':').map(Number);
+      return hours * 60 + minutes;
+  });
+
+  // Verificando se o horário atual está dentro do intervalo
+  return currentTime >= start && currentTime <= end;
+}
+
+// Definindo o intervalo de horário
+const interval = "08:00:00-20:00"; // Intervalo de funcionamento
+
+// Executando a verificação ao carregar a página
+function att_status() {
+  if (isOpen(interval)) {
+    document.querySelector(".span_badge").textContent = "Aberto";
+    document.querySelector(".span_badge").classList.add('aberto');
+    document.querySelector(".span_badge").classList.remove('fechado');
+  } else {
+    document.querySelector(".span_badge").textContent = "Fechado";
+    document.querySelector(".span_badge").classList.add('fechado');
+    document.querySelector(".span_badge").classList.remove('aberto');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  att_status();
+  setInterval(att_status, 10000);
+});
