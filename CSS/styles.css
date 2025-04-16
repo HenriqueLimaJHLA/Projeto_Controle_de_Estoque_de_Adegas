@@ -1,0 +1,164 @@
+:root { 
+  /* Geral */
+  --cores-principais:#ff0d0d;
+  --cores-principais_1:#000;
+  --cores-principais_2:#ffff; 
+  --cores-principais_3:#d4d0d0; /* Detalhes */
+
+  --cores-utilizavel_menu:#000; /* Menu */
+  --cores-utilizavel_menu1: rgba(255, 255, 255, 0.7); /* Menu Shadow */
+  --cores-utilizavel_menuShadow: rgba(0, 0, 0, 0.7); /* Menu Shadow */
+  --cores-utilizavel_background:#ffffff; /* Background Página*/
+  --cores-utilizavel_background1:#000000; /* Background Buttons*/
+  --cores-utilizavel_background2:#ff0d0d; 
+
+  /* Inputs: */
+  --cores-utilizavel_inputs:#fff;/* background input */
+  --cores-utilizavel_inputs_fonte:#000; /* Fonte da input */
+  --cores-utilizavel_inputs_focus: 0 0 5px rgba(0, 0, 0, 0.2); /* Box-shadow */
+  --cores-utilizavel_inputs_placeholder: rgb(150, 150, 150); /* Placeholder input*/
+  --cores-utilizavel_inputs_border: #d4d0d0; /* Borda input*/
+  
+  /* Botões: */
+  --cores-utilizavel_buttons:#000;
+  --cores-utilizavel_buttons_fonte:#fff; 
+  --cores-utilizavel_buttons_hover_background: #ff0d0d; 
+  --cores-utilizavel_buttons_hover_color: #fff;  
+  --cores-utilizavel_buttons_border: none; 
+  --cores-utilizavel_buttons_opacity: 0.7;
+
+  /* Select: */
+  --cores-utilizavel_select:#211f1f;
+  --cores-utilizavel_select_fonte:#fff;
+  --cores-utilizavel_select_selected_background: #000;
+  --cores-utilizavel_select_selected_fonte: #ff0d0d;
+
+  --cores-utilizavel_fonte:#000; /* Fonte da página */
+  --cores-utilizavel_fonte1:#fff; /* Fonte da menu */
+  --cores-utilizavel_fonte2:#000; /* Fonte da Tabela */
+  --cores-utilizavel_fonte3:#ff0d0d; /* Fonte fica vermelho (titulos */
+  
+  --cores-utilizavel_hover:#ff0d0d; /* Hover buttons + Logout*/
+  --cores-utilizavel_hover1:#fff; /* Hover itens Menu */
+
+
+  /* Normal / Padrao */
+  --cores-normal_corLogo:#ff0d0d;
+  --cores-normal_corLogo1:#000;
+  --cores-normal_corLogo2:#fff; 
+  --cores-normal_corLogo3:#d4d0d0; 
+
+  --cores-normal_menu:#000; 
+  --cores-normal_background:#ffffff; 
+  --cores-normal_background1:#000000; 
+  --cores-normal_background2:#ff0d0d; 
+
+  /* Inputs: */
+  --cores-padrao_inputs:#fff;
+  --cores-padrao_inputs_fonte:#000; 
+  --cores-padrao_inputs_focus: 0 0 5px rgba(0, 0, 0, 0.3); 
+  --cores-padrao_inputs_placeholder: rgb(150, 150, 150); 
+  --cores-padrao_inputs_border:#d4d0d0; 
+  
+  /* Botões: */
+  --cores-padrao_buttons:#000;
+  --cores-padrao_buttons_fonte:#fff; 
+  --cores-padrao_buttons_hover_background: #ff0d0d; 
+  --cores-padrao_buttons_hover_color: #fff;  
+  --cores-padrao_buttons_border: none; 
+  --cores-padrao_buttons_opacity: 0.70;
+
+  /* Select: */
+  --cores-padrao_select:#fff;
+  --cores-padrao_select_fonte:#000;
+  --cores-padrao_select_selected_background: #ff0d0d;
+  --cores-padrao_select_selected_fonte: #fff;
+
+  --cores-normal_fonte:#000;
+  --cores-normal_fonte1:#fff;
+  --cores-normal_fonte2:#000;
+  --cores-normal_fonte3:#ff0d0d; /* Fonte fica vermelho (titulos */
+
+  --cores-normal_hover:#ff0d0d; 
+  --cores-normal_hover1:#fff; 
+
+  /* Light */
+  --cores-light_corLogo:#ff0d0d;
+  --cores-light_corLogo1:#000;
+  --cores-light_corLogo2:#fff; 
+  --cores-light_corLogo3:#d4d0d0; 
+
+  --cores-light_menu:#000; 
+  --cores-light_background:#dcdcdc; 
+  --cores-light_background1:#ffffff; 
+  --cores-light_background2:#000000; 
+
+  --cores-light_fonte:#000; 
+  --cores-light_fonte1:#000; 
+  --cores-light_fonte2:#fff;
+  --cores-light_fonte3:#ff0d0d; /* Fonte fica vermelho (titulos */
+
+  --cores-light_hover:#ff0d0d; 
+  --cores-light_hover1:#fff;  
+  
+
+  /* Dark */
+  --cores-dark_corLogo:#ff0d0d;
+  --cores-dark_corLogo1:#000;
+  --cores-dark_corLogo2:#fff; 
+  --cores-dark_corLogo3:#211f1f; /* Detalhes */
+
+  --cores-dark_menu:#211f1f; /* Menu */
+  --cores-dark_menu1: rgba(0,0,0,0.7); /* Menu Shadow */
+  --cores-dark_background:#080808; /* Background Página*/
+  --cores-dark_background1:#000000;
+  --cores-dark_background2:#000000; 
+
+  /* Inputs: */
+  --cores-dark_inputs:#211f1f;
+  --cores-dark_inputs_fonte:#fff;  
+  --cores-dark_inputs_focus: 0 0 5px rgba(255, 255, 255, 0.7); 
+  --cores-dark_inputs_placeholder: rgb(204, 204, 204); 
+  --cores-dark_inputs_border: #211f1f; 
+
+  /* Botões: */
+  --cores-dark_buttons:#211f1f;
+  --cores-dark_buttons_fonte:#ff0d0d; 
+  --cores-dark_buttons_hover_background: #211f1f; 
+  --cores-dark_buttons_hover_color: #ff0d0d;  
+  --cores-dark_buttons_border: none; 
+  
+  /* Select: */
+  --cores-dark_select:#211f1f;
+  --cores-dark_select_fonte:#fff;
+  --cores-dark_select_selected_background: #000;
+  --cores-dark_select_selected_fonte: #ff0d0d;
+
+  --cores-dark_fonte:#fff; /* Fonte da página */
+  --cores-dark_fonte1:#ff0d0d; /* Fonte da menu */
+  --cores-dark_fonte2:#0d0b0b; /* Fonte da Tabela */
+  --cores-dark_fonte3:#ff0d0d; /* Fonte fica vermelho (titulos */
+
+  --cores-dark-hover: rgb(255, 0, 0); /* Hover buttons + Logout*/
+  --cores-dark-hover1:#fff; /* Hover itens Menu */
+
+
+  /* Styles Index */
+  --cor-index_cor: red;
+  --cor-index_cor1: #ffff;
+  --cor-index_cor2: #0000;
+  --cor-index_cor3: #211f1f;
+  --cor-index_cor_placeholder_input: rgb(150, 150, 150);
+  --cor-index_cor_border_input:#d4d0d0;
+  --cor-index_cor_border_input2:#d4d0d0; 
+  --cor-index_cor_box-shadow1: rgba(0, 0, 0, 0.3);
+  --cor-index_cor_box-shadow2: rgba(255, 255, 255, 0.7); 
+  --cor-index_cor_box-shadow3: rgba(0, 0, 0, 0.3);
+
+  
+}
+
+  /* IMPORTANTE */
+  /* #211f1f */
+
+
