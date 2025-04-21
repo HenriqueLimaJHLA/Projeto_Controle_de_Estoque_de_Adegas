@@ -46,7 +46,3 @@ Você pode exportar relatórios de estoque e movimentação em dois formatos:
 - Administrador: acesso completo ao sistema
 - Operador: acesso ao estoque, movimentações e relatórios
 - Visualizador: apenas leitura dos dados
-
-## 📝 Licença
-
-Este projeto está licenciado sob a MIT License.
